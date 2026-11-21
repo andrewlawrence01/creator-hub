@@ -59,9 +59,13 @@ app.use('/auth', authRoutes);
 // Workspace routes
 app.use('/workspaces', workspaceRoutes);
 
-// Home page
+// Automatically redirect visitors
 app.get('/', (req, res) => {
-    res.send('Welcome to CreatorHub!');
+    if (req.session.user) {
+        return res.redirect('/dashboard');
+    }
+
+    return res.redirect('/auth/login');
 });
 
 // Protected dashboard
