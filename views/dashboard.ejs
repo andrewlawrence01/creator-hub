@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | CreatorHub</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+    <main class="dashboard-container">
+
+        <header class="dashboard-header">
+            <div>
+                <h1>CreatorHub</h1>
+                <p>Your creative workspace starts here.</p>
+            </div>
+
+            <form action="/auth/logout" method="POST">
+                <button type="submit">Sign Out</button>
+            </form>
+        </header>
+
+        <section class="dashboard-welcome">
+            <h2>Welcome, <%= user.first_name %>!</h2>
+
+            <p>
+                You're signed in to CreatorHub. Manage your content,
+                projects, and collaborations from your dashboard.
+            </p>
+        </section>
+
+        <section class="dashboard-section">
+            <div class="dashboard-section-header">
+                <div>
+                    <h2>Your Workspaces</h2>
+                    <p>Manage your personal and organization workspaces.</p>
+                </div>
+
+                <a href="/workspaces/create" class="dashboard-button">
+                    Create Workspace
+                </a>
+            </div>
+
+            <% if (workspaces.length > 0) { %>
+
+                <div class="dashboard-grid">
+
+                    <% workspaces.forEach(workspace => { %>
+
+                        <article class="dashboard-card">
+
+                            <h3><%= workspace.workspace_name %></h3>
+
+                            <p>
+                                <strong>Type:</strong>
+                                <%= workspace.workspace_type %>
+                            </p>
+
+                            <p>
+                                <strong>Your Role:</strong>
+                                <%= workspace.workspace_role %>
+                            </p>
+
+                            <% if (workspace.organization_name) { %>
+                                <p>
+                                    <strong>Organization:</strong>
+                                    <%= workspace.organization_name %>
+                                </p>
+                            <% } %>
+
+                        </article>
+
+                    <% }) %>
+
+                </div>
+
+            <% } else { %>
+
+                <p>You don't belong to any workspaces yet.</p>
+
+            <% } %>
+        </section>
+
+        <section class="dashboard-section">
+            <h2>Workspace Tools</h2>
+
+            <div class="dashboard-grid">
+
+                <article class="dashboard-card">
+                    <h3>Projects</h3>
+                    <p>Organize and manage your creative projects.</p>
+                </article>
+
+                <article class="dashboard-card">
+                    <h3>Content</h3>
+                    <p>Plan, create, and track your content.</p>
+                </article>
+
+                <article class="dashboard-card">
+                    <h3>Tasks</h3>
+                    <p>Keep track of your upcoming work.</p>
+                </article>
+
+                <article class="dashboard-card">
+                    <h3>Collaborations</h3>
+                    <p>Work with your team and other creators.</p>
+                </article>
+
+            </div>
+        </section>
+
+        <footer class="dashboard-footer">
+            <p>CreatorHub &copy; <%= new Date().getFullYear() %></p>
+        </footer>
+
+    </main>
+</body>
+
+</html>

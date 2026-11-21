@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Workspace | CreatorHub</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+    <main class="auth-container">
+        <section class="auth-card">
+            <h1>Create a Workspace</h1>
+
+            <p>
+                Create a personal workspace or establish an
+                organization for your creative team.
+            </p>
+
+            <% if (errors && errors.length > 0) { %>
+                <div class="error-messages">
+                    <% errors.forEach(error => { %>
+                        <p><%= error.msg %></p>
+                    <% }) %>
+                </div>
+            <% } %>
+
+            <form action="/workspaces/create" method="POST">
+                <div class="form-group">
+                    <label for="workspace_name">Workspace Name</label>
+
+                    <input
+                        type="text"
+                        id="workspace_name"
+                        name="workspace_name"
+                        value="<%= formData.workspace_name || '' %>"
+                        maxlength="100"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="workspace_type">Workspace Type</label>
+
+                    <select
+                        id="workspace_type"
+                        name="workspace_type"
+                        required
+                    >
+                        <option value="">Choose a workspace type</option>
+
+                        <option
+                            value="personal"
+                            <%= formData.workspace_type === 'personal' ? 'selected' : '' %>
+                        >
+                            Personal Workspace
+                        </option>
+
+                        <option
+                            value="organization"
+                            <%= formData.workspace_type === 'organization' ? 'selected' : '' %>
+                        >
+                            Organization Workspace
+                        </option>
+                    </select>
+                </div>
+
+                <button type="submit">Create Workspace</button>
+            </form>
+
+            <p class="auth-footer">
+                <a href="/dashboard">Return to Dashboard</a>
+            </p>
+        </section>
+    </main>
+</body>
+
+</html>
