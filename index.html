@@ -1,0 +1,495 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CreatorHub helps content creators organize projects, manage content, and collaborate with their teams.">
+    <title>CreatorHub | Create Without Limits</title>
+
+    <style>
+        :root {
+            --background: #f1f5f9;
+            --surface: #ffffff;
+            --text: #1e293b;
+            --muted: #64748b;
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --border: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont,
+                "Segoe UI", sans-serif;
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .container {
+            width: min(1100px, 90%);
+            margin: auto;
+        }
+
+        header {
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+        }
+
+        nav {
+            min-height: 76px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            font-weight: 600;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .button {
+            display: inline-block;
+            padding: 12px 22px;
+            border-radius: 9px;
+            background: var(--primary);
+            color: white;
+            font-weight: 700;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .button:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+
+        .button-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+
+        .button-outline:hover {
+            color: white;
+        }
+
+        .hero {
+            padding: 100px 0 90px;
+            text-align: center;
+            background:
+                radial-gradient(circle at top right, #dbeafe, transparent 38%),
+                var(--background);
+        }
+
+        .eyebrow {
+            display: inline-block;
+            padding: 6px 14px;
+            margin-bottom: 22px;
+            border-radius: 30px;
+            background: #dbeafe;
+            color: #1d4ed8;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+
+        .hero h1 {
+            max-width: 800px;
+            margin: 0 auto 22px;
+            font-size: clamp(2.6rem, 6vw, 4.5rem);
+            line-height: 1.1;
+            letter-spacing: -2px;
+        }
+
+        .hero h1 span {
+            color: var(--primary);
+        }
+
+        .hero p {
+            max-width: 650px;
+            margin: 0 auto 32px;
+            color: var(--muted);
+            font-size: 1.15rem;
+        }
+
+        .hero-actions {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-heading {
+            max-width: 650px;
+            margin: 0 auto 42px;
+            text-align: center;
+        }
+
+        .section-heading h2 {
+            margin-bottom: 12px;
+            font-size: clamp(2rem, 4vw, 2.7rem);
+            letter-spacing: -1px;
+        }
+
+        .section-heading p {
+            color: var(--muted);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .feature-card {
+            padding: 30px;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            background: var(--surface);
+            box-shadow: 0 8px 25px rgba(15, 23, 42, 0.04);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            display: grid;
+            place-items: center;
+            margin-bottom: 18px;
+            border-radius: 12px;
+            background: #dbeafe;
+            font-size: 1.5rem;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .feature-card p {
+            color: var(--muted);
+        }
+
+        .workflow {
+            background: var(--surface);
+        }
+
+        .workflow-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+            text-align: center;
+        }
+
+        .workflow-item {
+            padding: 20px;
+        }
+
+        .workflow-number {
+            width: 44px;
+            height: 44px;
+            display: grid;
+            place-items: center;
+            margin: 0 auto 16px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            font-weight: 800;
+        }
+
+        .workflow-item h3 {
+            margin-bottom: 8px;
+        }
+
+        .workflow-item p {
+            color: var(--muted);
+        }
+
+        .cta {
+            padding: 75px 20px;
+            border-radius: 20px;
+            background: #1e3a8a;
+            color: white;
+            text-align: center;
+        }
+
+        .cta h2 {
+            margin-bottom: 14px;
+            font-size: clamp(2rem, 4vw, 2.8rem);
+        }
+
+        .cta p {
+            max-width: 600px;
+            margin: 0 auto 26px;
+            color: #dbeafe;
+        }
+
+        .cta .button {
+            background: white;
+            color: #1d4ed8;
+        }
+
+        .cta .button:hover {
+            background: #dbeafe;
+        }
+
+        footer {
+            padding: 30px 0;
+            margin-top: 80px;
+            border-top: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--muted);
+            text-align: center;
+        }
+
+        footer strong {
+            color: var(--text);
+        }
+
+        @media (max-width: 750px) {
+            .features,
+            .workflow-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                padding: 75px 0;
+            }
+
+            nav {
+                flex-direction: column;
+                justify-content: center;
+                padding: 18px 0;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <nav class="container">
+            <a href="#" class="logo">Creator<span>Hub</span></a>
+
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#workflow">How It Works</a>
+                <a href="https://github.com/andrewlawrence01/creator-hub"
+                   target="_blank" rel="noopener noreferrer">GitHub</a>
+                <a href="https://creator-hub-3fyy.onrender.com"
+                   class="button">Launch App</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <span class="eyebrow">Your Creative Workspace</span>
+
+                <h1>
+                    Bring Your Creative Ideas
+                    <span>To Life.</span>
+                </h1>
+
+                <p>
+                    CreatorHub gives content creators one place to organize
+                    projects, manage content, coordinate tasks, and collaborate
+                    with their teams.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="https://creator-hub-3fyy.onrender.com"
+                       class="button">
+                        Launch CreatorHub
+                    </a>
+
+                    <a href="#features" class="button button-outline">
+                        Explore Features
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="features">
+            <div class="container">
+                <div class="section-heading">
+                    <h2>Everything Your Creative Team Needs</h2>
+                    <p>
+                        Keep your creative work organized and your projects
+                        moving forward with a centralized workspace.
+                    </p>
+                </div>
+
+                <div class="features">
+                    <article class="feature-card">
+                        <div class="feature-icon">📁</div>
+                        <h3>Project Management</h3>
+                        <p>
+                            Organize your creative projects and keep important
+                            information together in one place.
+                        </p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">🎬</div>
+                        <h3>Content Management</h3>
+                        <p>
+                            Manage content ideas, production workflows, and
+                            publishing plans across your creative projects.
+                        </p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">🤝</div>
+                        <h3>Team Collaboration</h3>
+                        <p>
+                            Create shared workspaces and bring creators,
+                            editors, and collaborators together.
+                        </p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">✓</div>
+                        <h3>Task Organization</h3>
+                        <p>
+                            Keep track of responsibilities and the work that
+                            needs to get done.
+                        </p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">🏢</div>
+                        <h3>Multiple Workspaces</h3>
+                        <p>
+                            Separate personal creative work from independent
+                            organizations and team projects.
+                        </p>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">🔐</div>
+                        <h3>Personal Accounts</h3>
+                        <p>
+                            Register for an account and access your own
+                            personalized creative workspace.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section workflow" id="workflow">
+            <div class="container">
+                <div class="section-heading">
+                    <h2>A Better Way to Create</h2>
+                    <p>
+                        Bring your ideas, people, and projects together
+                        through a simple creative workflow.
+                    </p>
+                </div>
+
+                <div class="workflow-grid">
+                    <div class="workflow-item">
+                        <div class="workflow-number">1</div>
+                        <h3>Create Your Account</h3>
+                        <p>
+                            Sign up and establish your personal CreatorHub
+                            workspace.
+                        </p>
+                    </div>
+
+                    <div class="workflow-item">
+                        <div class="workflow-number">2</div>
+                        <h3>Organize Your Work</h3>
+                        <p>
+                            Create workspaces and organize your creative
+                            projects and responsibilities.
+                        </p>
+                    </div>
+
+                    <div class="workflow-item">
+                        <div class="workflow-number">3</div>
+                        <h3>Bring Ideas to Life</h3>
+                        <p>
+                            Manage your creative process and work toward
+                            completing your projects.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="container">
+            <div class="cta">
+                <h2>Ready to Create Something Great?</h2>
+                <p>
+                    Start organizing your creative work with CreatorHub.
+                    Your next project starts here.
+                </p>
+
+                <a href="https://creator-hub-3fyy.onrender.com"
+                   class="button">
+                    Visit the Live Application
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>
+                <strong>CreatorHub</strong> &copy; 2026.
+                Built to help creators bring ideas to life.
+            </p>
+            <p>
+                <a href="https://github.com/andrewlawrence01/creator-hub"
+                   target="_blank" rel="noopener noreferrer">
+                    View Source Code on GitHub
+                </a>
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>
