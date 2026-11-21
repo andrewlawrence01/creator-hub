@@ -27,13 +27,18 @@ app.get('/health/db', async (req, res) => {
             databaseTime: result.rows[0].current_time
         });
     } catch (error) {
-        console.error('Database connection failed:', error.message);
+    console.error('POSTGRESQL CONNECTION DIAGNOSTICS:', {
+        message: error.message,
+        code: error.code,
+        detail: error.detail,
+        severity: error.severity
+    });
 
-        res.status(500).json({
-            status: 'error',
-            message: 'Unable to connect to the database.'
-        });
-    }
+    res.status(500).json({
+        status: 'error',
+        message: 'Unable to connect to the database.'
+    });
+}
 });
 
 app.listen(PORT, '0.0.0.0', () => {
