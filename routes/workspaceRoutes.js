@@ -2,20 +2,19 @@ import express from 'express';
 import { body } from 'express-validator';
 
 import workspaceController from '../controllers/workspaceController.js';
+import workspaceDetailsController from '../controllers/workspaceDetailsController.js';
+
 import requireAuth from '../middleware/requireAuth.js';
 
 const router = express.Router();
 
-// Require authentication for all workspace routes
+// All workspace routes require authentication
 router.use(requireAuth);
 
 // Display workspace creation page
-router.get(
-    '/create',
-    workspaceController.showCreateWorkspace
-);
+router.get('/create', workspaceController.showCreateWorkspace);
 
-// Validate workspace creation
+// Validate workspace creation form
 const workspaceValidation = [
     body('workspace_name')
         .trim()
@@ -29,11 +28,17 @@ const workspaceValidation = [
         .withMessage('Please select a valid workspace type.')
 ];
 
-// Process workspace creation
+// Create a workspace
 router.post(
     '/create',
     workspaceValidation,
     workspaceController.createWorkspace
+);
+
+// Display individual workspace details
+router.get(
+    '/:workspaceId',
+    workspaceDetailsController.showWorkspaceDetails
 );
 
 export default router;

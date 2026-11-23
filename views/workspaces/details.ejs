@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title><%= workspace.workspace_name %> | CreatorHub</title>
+
+    <link rel="stylesheet" href="/css/styles.css">
+
+    <style>
+        .workspace-details {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .workspace-header {
+            padding: 35px;
+            margin-bottom: 30px;
+            background: var(--card-background, #ffffff);
+            border: 1px solid var(--border-color, #e2e8f0);
+            border-radius: 14px;
+        }
+
+        .workspace-header h1 {
+            margin: 0 0 12px;
+        }
+
+        .workspace-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .workspace-tag {
+            padding: 6px 12px;
+            border-radius: 20px;
+            background: var(--tag-background, #e2e8f0);
+            color: var(--text-color, #1e293b);
+            font-size: 0.9rem;
+        }
+
+        .workspace-section {
+            margin-bottom: 35px;
+        }
+
+        .workspace-section h2 {
+            margin-bottom: 18px;
+        }
+
+        .workspace-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .workspace-feature {
+            padding: 25px;
+            background: var(--card-background, #ffffff);
+            border: 1px solid var(--border-color, #e2e8f0);
+            border-radius: 12px;
+        }
+
+        .workspace-feature h3 {
+            margin-top: 0;
+        }
+
+        .workspace-feature p {
+            color: var(--muted-text, #64748b);
+        }
+
+        .coming-soon {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 4px 9px;
+            border-radius: 15px;
+            background: var(--tag-background, #e2e8f0);
+            font-size: 0.8rem;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: var(--primary-color, #2563eb);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <nav>
+            <a href="/dashboard" class="logo">CreatorHub</a>
+
+            <div>
+                <span>
+                    Welcome, <%= user.first_name %>
+                </span>
+
+                <form action="/auth/logout" method="POST"
+                      style="display: inline;">
+                    <button type="submit">Sign Out</button>
+                </form>
+            </div>
+        </nav>
+    </header>
+
+    <main class="workspace-details">
+
+        <a href="/dashboard" class="back-link">
+            &larr; Back to Dashboard
+        </a>
+
+        <section class="workspace-header">
+
+            <h1><%= workspace.workspace_name %></h1>
+
+            <p>
+                Welcome to your CreatorHub workspace.
+                Manage your creative projects and organize your work
+                from one central location.
+            </p>
+
+            <div class="workspace-meta">
+
+                <span class="workspace-tag">
+                    <%= workspace.workspace_type === 'organization'
+                        ? 'Organization Workspace'
+                        : 'Personal Workspace' %>
+                </span>
+
+                <span class="workspace-tag">
+                    Your Role: <%= workspace.workspace_role %>
+                </span>
+
+                <% if (workspace.organization_name) { %>
+                    <span class="workspace-tag">
+                        Organization: <%= workspace.organization_name %>
+                    </span>
+                <% } %>
+
+            </div>
+
+        </section>
+
+        <section class="workspace-section">
+
+            <h2>Workspace Management</h2>
+
+            <div class="workspace-features">
+
+                <article class="workspace-feature">
+                    <h3>Projects</h3>
+                    <p>
+                        Organize your creative projects and keep track
+                        of important milestones.
+                    </p>
+                    <span class="coming-soon">Coming Soon</span>
+                </article>
+
+                <article class="workspace-feature">
+                    <h3>Content</h3>
+                    <p>
+                        Manage content ideas, scripts, platforms,
+                        and publishing plans.
+                    </p>
+                    <span class="coming-soon">Coming Soon</span>
+                </article>
+
+                <article class="workspace-feature">
+                    <h3>Tasks</h3>
+                    <p>
+                        Organize responsibilities and monitor
+                        your project's progress.
+                    </p>
+                    <span class="coming-soon">Coming Soon</span>
+                </article>
+
+                <article class="workspace-feature">
+                    <h3>Team Collaboration</h3>
+                    <p>
+                        Manage team members and collaborate
+                        with editors and other creators.
+                    </p>
+                    <span class="coming-soon">Coming Soon</span>
+                </article>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+</html>

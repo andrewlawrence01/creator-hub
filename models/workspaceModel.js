@@ -23,6 +23,31 @@ async function getWorkspacesByUser(userId) {
     return result.rows;
 }
 
+// Get one workspace, provided the user is a member
+async function getWorkspaceById(workspaceId, userId) {
+    const result = await pool.query(
+        `SELECT
+            w.workspace_id,
+            w.workspace_name,
+            w.workspace_type,
+            w.organization_id,
+            o.organization_name,
+            wm.workspace_role,
+            w.created_at
+         FROM workspaces w
+         INNER JOIN workspace_members wm
+            ON w.workspace_id = wm.workspace_id
+         LEFT JOIN organizations o
+            ON w.organization_id = o.organization_id
+         WHERE w.workspace_id = $1
+           AND wm.user_id = $2
+         LIMIT 1`,
+        [workspaceId, userId]
+    );
+
+    return result.rows[0] || null;
+}
+
 // Create a new workspace
 async function createWorkspace(userId, workspaceName, workspaceType) {
     const client = await pool.connect();
@@ -91,5 +116,6 @@ async function createWorkspace(userId, workspaceName, workspaceType) {
 
 export default {
     getWorkspacesByUser,
+    getWorkspaceById,
     createWorkspace
 };
